@@ -63,6 +63,10 @@ gulp.task('copy-images', function () {
     .pipe(gulp.dest('dist/img'))
 })
 
+gulp.task('copy-fonts', function () {
+  return gulp.src(['app/fonts/**/*',])
+    .pipe(gulp.dest('dist/fonts'))
+})
 gulp.task('copy', gulp.parallel(
   function () {
     return gulp.src(['app/favicon.ico', 'app/favicon_unread.ico', 'app/manifest.webapp', 'app/manifest.webapp.json', 'app/manifest.json', 'app/**/*worker.js'])
@@ -179,7 +183,7 @@ gulp.task('build', gulp.series(
   'enable-production',
   'usemin-index',
   'usemin-badbrowser',
-  gulp.parallel('copy', 'copy-locales', 'copy-images', 'disable-production'),
+  gulp.parallel('copy', 'copy-locales', 'copy-images', 'copy-fonts', 'disable-production'),
   'clean-templates'
 ))
 
@@ -215,7 +219,6 @@ var fileGlobs = [
   './dist/**/*',
   '!dist/manifest.*',
   '!dist/*.html',
-  '!dist/fonts/*',
   '!dist/img/icons/icon*.png',
   '!dist/js/background.js',
   '!dist/css/badbrowser.css'
@@ -321,6 +324,8 @@ gulp.task('watch', gulp.series(gulp.parallel('server', 'less'), function () {
   gulp.watch('app/css/*.css', gulp.series('watchcss'))
   gulp.watch('app/less/**/*.less', gulp.series('less'))
   gulp.watch('app/partials/**/*.html', gulp.series('watchhtml'))
+  return gulp.src('app/*.*')
+    .pipe($.livereload())
 }))
 
 gulp.task('bump', gulp.series(gulp.parallel('bump-version-manifests', 'bump-version-config'), function () {

@@ -1,4 +1,5 @@
 @import "lib/mixins";
+@import "font";
 
 /* app common css */
 
@@ -14,7 +15,7 @@ body {
   overflow: hidden;
 
   &.non_osx {
-    font: 13px/18px Tahoma, sans-serif, Arial, Helvetica;
+    font: 13px/18px 'IRANSans',Tahoma, sans-serif, Arial, Helvetica;
   }
 }
 
@@ -295,14 +296,23 @@ input[type="number"] {
   }
 }
 
-.md-input-animated {
-  .md-input-group,
-  .md-input-label {
-    -webkit-transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-  }
+.im_message_text {
+  word-wrap: break-word;
+  line-height: 150%;
+  white-space: pre-wrap;
+  direction:rtl;
 }
-
+.im_message_body
+{
+direction:rtl;
+    text-align: justify;
+}
+.im_message_document_caption a,
+.im_message_photo_caption a,
+.im_message_text_caption a
+{
+    direction: ltr;
+}
 .md-input {
   color: #000;
   background: #fff;
@@ -316,6 +326,13 @@ input[type="number"] {
   resize: none;
 
   .box-shadow(none);
+}
+.md-input-animated {
+  .md-input-group,
+  .md-input-label {
+    -webkit-transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+  }
 }
 .md-input-disabled .md-input {
   color: #999;
@@ -1613,7 +1630,11 @@ a.im_message_video_thumb {
   overflow: hidden;
   border-radius: 2px;
 }
-img.im_message_photo_thumb,
+img.im_message_photo_thumb {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
 img.im_message_video_thumb {
   overflow: hidden;
   border-radius: 2px;
@@ -2365,7 +2386,8 @@ div.im_message_body {
 
   .im_message_reply_author,
   .im_message_reply_body {
-    margin-left: 52px;
+    margin-right: 52px;
+	direction:rtl;
   }
 
   .im_message_reply_wrap & {
@@ -2379,11 +2401,6 @@ a.im_message_fwd_photo {
 }
 .im_message_fwd_date {
   padding: 0;
-}
-.im_message_text {
-  word-wrap: break-word;
-  line-height: 150%;
-  white-space: pre-wrap;
 }
 .im_message_photo_caption,
 .im_message_video_caption,
@@ -3318,7 +3335,7 @@ a.composer_command_option:hover .composer_command_desc,
   line-height: 17px;
 
   border: 1px solid #d2dbe3;
-  border-radius: 2px;
+  border-radius: 7px;
 
   .box-shadow(none);
   .box-sizing(content-box);
